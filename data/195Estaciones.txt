@@ -142,7 +142,7 @@ Velódromo_9
 Ciudad Deportiva_9
 Puebla_9
 Pantitlan_9
-Pantitlan A
+Pantitlan_A
 Agrícola Oriental_A
 Canal de San Juan_A
 Tepalcates_A
