@@ -129,7 +129,7 @@ Atlalilco_8
 Iztapalapa_8
 Cerro de la Estrella_8
 UAM I_8
-Constitución de_1917_8
+Constitución de 1917_8
 Tacubaya_9
 Patriotismo_9
 Chilpancingo_9
@@ -141,8 +141,8 @@ Mixiuhca_9
 Velódromo_9
 Ciudad Deportiva_9
 Puebla_9
-Pantitlan_9
-Pantitlan_A
+Pantitlán_9
+Pantitlán_A
 Agrícola Oriental_A
 Canal de San Juan_A
 Tepalcates_A

@@ -10,7 +10,7 @@ view = QGraphicsView(scene)
 view.setWindowTitle("Mapa del metro")
 view.resize(1096, 1280)
 
-mapa = QPixmap("MapaMetroCDMX.png")
+mapa = QPixmap("../data/MapaMetroCDMX.png")
 map_item = QGraphicsPixmapItem(mapa)
 scene.addItem(map_item)
 
