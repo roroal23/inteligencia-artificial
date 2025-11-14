@@ -100,7 +100,7 @@ def main():
 
     #Imprimir el grafo
 
-    fig = plt.figure( figsize=(60,30))
+    plt.figure( figsize=(60,30))
     grafo_metro.rellenar_aristas()
 
     #pos = nx.planar_layout(grafo_metro.grafo)

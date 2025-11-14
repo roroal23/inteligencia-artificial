@@ -49,6 +49,7 @@ class TablaEstaciones():
         self.id_a_estacion : dict[int, tuple[str,str]] = {}
         self.estacion_a_lineas : dict[str, list[str]] = {}
         self.estaciones = estaciones
+        self.transbordos : set[str] = set()
         self.rellenar_mapas()
 
     def rellenar_mapas(self):
@@ -58,6 +59,10 @@ class TablaEstaciones():
             if nombre not in self.estacion_a_lineas:
                 self.estacion_a_lineas[nombre] = []
             self.estacion_a_lineas[nombre].append(linea)
+
+            #Rellena transbordos
+            if nombre not in self.transbordos and len(self.estacion_a_lineas[nombre]) >= 2:
+                self.transbordos.add(nombre)
 
             #Rellena los mapas estacion <-> id
             self.estacion_a_id[(nombre, linea)] = i
@@ -73,6 +78,7 @@ class TablaEstaciones():
 
     def obtener_lineas(self, nombre: str) -> list[str]:
         return self.estacion_a_lineas[nombre]
+
 
 class GrafoMetro():
     """Crea y almacena el grafo del metro de la CDMX"""
@@ -146,6 +152,7 @@ def main():
     #pos = nx.spring_layout(grafo_metro.grafo, k = 3)
     pos = nx.kamada_kawai_layout(grafo_metro.grafo)
 
+
     nx.draw(grafo_metro.grafo, pos, node_color = colores_nodos, with_labels=True,  node_size = 300)
     nombres = nx.get_node_attributes(grafo_metro.grafo, "nombre")
     linea = nx.get_node_attributes(grafo_metro.grafo, "linea")
@@ -158,19 +165,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
