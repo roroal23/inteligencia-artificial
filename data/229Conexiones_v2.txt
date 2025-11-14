@@ -1,0 +1,229 @@
+Pantitlán_1,Zaragoza,1320
+Zaragoza_1,Gómez Farías_1,762
+Gómez Farías_1,Boulevard Puerto Aéreo_1,611
+Boulevard Puerto Aéreo_1,Balbuena_1,595
+Balbuena_1,Moctezuma_1,703
+Moctezuma_1,San Lázaro_1,478
+San Lázaro_1,Candelaria_1,866
+Candelaria_1,Merced_1,698
+Merced_1,Pino Suárez_1,745 
+Pino Suárez_1,Isabel la Católica_1,382
+Isabel la Católica_1,Salto del Agua_1,445
+Salto del Agua_1,Balderas_1,458
+Balderas_1,Cuauhtémoc_1,409
+Cuauhtémoc_1,Insurgentes_1,793
+Insurgentes_1,Sevilla_1,645
+Sevilla_1,Chapultepec_1,501
+Chapultepec_1,Juanacatlán_1,973
+Juanacatlán_1,Tacubaya_1,1158
+Tacubaya_1,Observatorio_1,1262
+Cuatro Caminos_2,Panteones_2,1639
+Panteones_2,Tacuba_2,1416
+Tacuba_2,Cuitláhuac_2,637
+Cuitláhuac_2,Popotla_2,620
+Popotla_2,Colegio Militar_2,462
+Colegio Militar_2,Normal_2,516
+Normal_2,San Cosme_2,657
+San Cosme_2,Revolución_2,537
+Revolución_2,Hidalgo_2,587
+Hidalgo_2,Bellas Artes_2,447
+Bellas Artes_2,Allende_2,387
+Allende_2,Zócalo_2,602
+Zócalo_2,Pino Suárez_2,745
+Pino Suárez_2,San Antonio Abad_2,817
+San Antonio Abad_2,Chabacano_2,642
+Chabacano_2,Viaducto_2,774
+Viaducto_2,Xola_2,490
+Xola_2,Villa de Cortés_2,698
+Villa de Cortés_2,Nativitas_2,750
+Nativitas_2,Portales_2,924
+Portales_2,Ermita_2,748
+Ermita_2,General Anaya_2,838
+General Anaya_2,Tasqueña_2,1330
+Bellas Artes_2,Allende_2,387
+Allende_2,Zócalo_2,602
+Zócalo_2,Pino Suárez_2,745
+Pino Suárez_2,San Antonio Abad_2,817
+San Antonio Abad_2,Chabacano_2,642
+Chabacano_2,Viaducto_2,774
+Viaducto_2,Xola_2,490
+Xola_2,Villa de Cortés_2,698
+Villa de Cortés_2,Nativitas_2,750
+Nativitas_2,Portales_2,924
+Portales_2,Ermita_2,748
+Ermita_2,General Anaya_2,838
+General Anaya_2,Tasqueña_2,1330
+Indios Verdes_3,Deportivo 18 de Marzo_3,1166
+Deportivo 18 de Marzo_3,Potrero_3,966
+Potrero_3,La Raza_3,1106
+La Raza_3,Tlatelolco_3,1445
+Tlatelolco_3,Guerrero_3,1042
+Guerrero_3,Hidalgo_3,702
+Hidalgo_3,Juárez_3,251
+Juárez_3,Balderas_3,659
+Balderas_3,Niños Héroes_3,665
+Niños Héroes_3,Hospital General_3,559
+Hospital General_3,Centro Médico_3,653
+Centro Médico_3,Etiopía/Plaza de la Transparencia_3,1119
+Etiopía/Plaza de la Transparencia_3,Eugenia_3,950
+Eugenia_3,División del Norte_3,715
+División del Norte_3,Zapata_3,794
+Zapata_3,Coyoacán_3,1153
+Coyoacán_3,Viveros/Derechos Humanos_3,908
+Viveros/Derechos Humanos_3,Miguel Ángel de Quevedo_3,824
+Miguel Ángel de Quevedo_3,Copilco_3,1295
+Copilco_3,Universidad_3,1306
+Santa Anita_4,Jamaica_4,758
+Jamaica_4,Fray Servando_4,1033
+Fray Servando_4,Candelaria_4,633
+Candelaria_4,Morelos_4,1062
+Morelos_4,Canal del Norte_4,910
+Canal del Norte_4,Consulado_4,884
+Consulado_4,Bondojito_4,645
+Bondojito_4,Talismán_4,959
+Talismán_4,Martín Carrera_4,1129
+Politécnico_5,Instituto del Petróleo_5,1188
+Instituto del Petróleo_5,Autobuses del Norte_5,1067
+Autobuses del Norte_5,La Raza_5,975
+La Raza_5,Misterios_5,892
+Misterios_5,Valle Gómez_5,969
+Valle Gómez_5,Consulado_5,679
+Consulado_5,Eduardo Molina_5,815
+Eduardo Molina_5,Aragón_5,860
+Aragón_5,Oceanía_5,1219
+Oceanía_5,Terminal Aérea_5,1174
+Terminal Aérea_5,Hangares_5,1153
+Hangares_5,Pantitlán_5,1644
+El Rosario_6,Tezozómoc_6,1257
+Tezozómoc_6,Azcapotzalco_6,973
+Azcapotzalco_6,Ferrería_6,1173
+Ferrería_6,Norte 45_6,1072
+Norte 45_6,Vallejo_6,660
+Vallejo_6,Instituto del Petróleo_6,755
+Instituto del Petróleo_6,Lindavista_6,1258
+Lindavista_6,Deportivo 18 de Marzo_6,1075
+Deportivo 18 de Marzo_6,La Villa-Basílica_6,570
+La Villa-Basílica_6,Martín Carrera_6,1141
+El Rosario_7,Aquíles Serdán_7,1615
+Aquíles Serdán_7,Camarones_7,1402
+Camarones_7,Refinería_7,952
+Refinería_7,Tacuba_7,1295
+Tacuba_7,San Joaquín_7,1433
+San Joaquín_7,Polanco_7,1163
+Polanco_7,Auditorio_7,812
+Auditorio_7,Constituyentes_7,1430
+Constituyentes_7,Tacubaya_7,1005
+Tacubaya_7,San Pedro de los Pinos_7,1084
+San Pedro de los Pinos_7,San Antonio_7,606
+San Antonio_7,Mixcoac_7,788
+Mixcoac_7,Barranca del Muerto_7,1476
+Garibaldi_8,Bellas Artes_8,634
+Bellas Artes_8,San Juan de Letrán_8,456
+San Juan de Letrán_8,Salto del Agua_8,292
+Salto del Agua_8,Doctores_8,564
+Doctores_8,Obrera_8,761
+Obrera_8,Chabacano_8,1143
+Chabacano_8,La Viga_8,843
+La Viga_8,Santa Anita_8,633
+Santa Anita_8,Coyuya_8,968
+Coyuya_8,Iztacalco_8,993
+Iztacalco_8,Apatlaco_8,910
+Apatlaco_8,Aculco_8,534
+Aculco_8,Escuadrón 201_8,789
+Escuadrón 201_8,Atlalilco_8,1738
+Atlalilco_8,Iztapalapa_8,732
+Iztapalapa_8,Cerro de la Estrella_8,717
+Cerro de la Estrella_8,UAM I_8,1135
+UAM I_8,Constitución de 1917_8,1137
+Pantitlán_9,Puebla_9,1380
+Puebla_9,Ciudad Deportiva_9,800
+Ciudad Deportiva_9,Velódromo_9,1110
+Velódromo_9,Mixiuhca_9,821
+Mixiuhca_9,Jamaica_9,942
+Jamaica_9,Chabacano_9,1031
+Chabacano_9,Lázaro Cárdenas_9,1000
+Lázaro Cárdenas_9,Centro Médico_9,1059
+Centro Médico_9,Chilpancingo_9,1152
+Chilpancingo_9,Patriotismo_9,955
+Patriotismo_9,Tacubaya_9,1133
+Pantitlán_A,Agrícola Oriental_A,1409
+Agrícola Oriental_A,Canal de San Juan_A,1093
+Canal de San Juan_A,Tepalcates_A,1456
+Tepalcates_A,Guelatao_A,1161
+Guelatao_A,Peñón Viejo_A,2206
+Peñón Viejo_A,Acatitla_A,1379
+Acatitla_A,Santa Marta_A,1100
+Santa Marta_A,Los Reyes_A,1783
+Los Reyes_A,La Paz_A,1956
+Ciudad Azteca_B,Plaza Aragón_B,574
+Plaza Aragón_B,Olímpica_B,709
+Olímpica_B,Ecatepec_B,596
+Ecatepec_B,Múzquiz_B,1485
+Múzquiz_B,Río de los Remedios_B,1155
+Río de los Remedios_B,Impulsora_B,436
+Impulsora_B,Nezahualcóyotl_B,1393
+Nezahualcóyotl_B,Villa de Aragón_B,1335
+Villa de Aragón_B,Bosques de Aragón_B,784
+Bosques de Aragón_B,Deportivo Oceanía_B,1165
+Deportivo Oceanía_B,Oceanía_B,863
+Oceanía_B,Romero Rubio_B,809
+Romero Rubio_B,Ricardo Flores Magón_B,908
+Ricardo Flores Magón_B,San Lázaro_B,907
+San Lázaro_B,Morelos_B,1296
+Morelos_B,Tepito_B,498
+Tepito_B,Lagunilla_B,611
+Lagunilla_B,Garibaldi_B,474
+Garibaldi_B,Guerrero_B,757
+Guerrero_B,Buenavista_B,521
+Tláhuac_12,Tlaltenco_12,1298
+Tlaltenco_12,Zapotitlán_12,1115
+Zapotitlán_12,Nopalera_12,1276
+Nopalera_12,Olivos_12,1360
+Olivos_12,Tezonco_12,490
+Tezonco_12,Periférico Oriente_12,1545
+Periférico Oriente_12,Calle 11_12,1111
+Calle 11_12,Lomas Estrella_12,906
+Lomas Estrella_12,San Andrés Tomatlán_12,1060
+San Andrés Tomatlán_12,Culhuacán_12,990
+Culhuacán_12,Atlalilco_12,1671
+Atlalilco_12,Mexicaltzingo_12,1922
+Mexicaltzingo_12,Ermita_12,1805
+Ermita_12,Eje Central_12,895
+Eje Central_12,Parque de los Venados_12,1280
+Parque de los Venados_12,Zapata_12,563
+Zapata_12,Hospital 20 de Noviembre_12,450
+Hospital 20 de Noviembre_12,Insurgentes Sur_12,725
+Insurgentes Sur_12,Mixcoac_12,651
+Atlalilco_8,Atlalilco_12,20
+Pantitlan_1,Pantitlan_A,14
+Ermita_2,Ermita_12,14
+La Raza_5,La Raza_3,12
+Consulado_5,Consulado_4,11
+Instituto del Petróleo_5,Instituto del Petróleo_6,11
+Pantitlán_1,Pantitlán_9,11
+Pantitlán_5,Pantitlán_A,10
+Jamaica_4,Jamaica_9,9
+Chabacano_8,Chabacano_2,9
+Candelaria_1,Candelaria_4,8
+Tacuba_2,Tacuba_7,7
+Tacubaya_1,Tacubaya_9,7
+Bellas Artes_2,Bellas Artes_8,7
+Martín Carrera_4,Martín Carrera_6,6
+Chabacano_9,Chabacano_2,7
+Pantitlán_5,Pantitlán_9,7
+Deportivo 18 de Marzo_3,Deportivo 18 de Marzo_6,7
+Mixcoac_7,Mixcoac_12,7
+Salto del Agua_1,Salto del Agua_8,6
+San Lázaro_B,San Lázaro_1,6
+Morelos_4,Morelos_B,6
+Santa Anita_8,Santa Anita_4,6
+Zapata_3,Zapata_12,6
+Tacubaya_1,Tacubaya_7,6
+Pantitlan_A,Pantitlan_9,6
+Tacubaya_7,Tacubaya_9,6
+Pino Suárez_1,Pino Suárez_2,6
+Chabacano_9,Chabacano_8,5
+Garibaldi_8,Garibaldi_B
+Guerrero_B,Guerrero_3,4
+Balderas_3,Balderas_1,4
+Centro Médico_9,Centro Médico_3,4
