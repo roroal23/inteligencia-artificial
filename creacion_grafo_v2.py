@@ -145,21 +145,34 @@ def main():
     print(grafo_metro.grafo.nodes(data = True))
     colores_nodos = [colores_linea[data["linea"]] for n, data in grafo_metro.grafo.nodes(data = True)]
 
-    plt.figure( figsize=(60,30))
+    plt.figure(figsize=(100, 60))
     grafo_metro.rellenar_aristas()
 
-    #pos = nx.planar_layout(grafo_metro.grafo)
-    #pos = nx.spring_layout(grafo_metro.grafo, k = 3)
+    # pos = nx.planar_layout(grafo_metro.grafo)
+    # pos = nx.spring_layout(grafo_metro.grafo, k = 3)
     pos = nx.kamada_kawai_layout(grafo_metro.grafo)
-
-
-    nx.draw(grafo_metro.grafo, pos, node_color = colores_nodos, with_labels=True,  node_size = 300)
+    nx.draw(grafo_metro.grafo, pos, node_color=colores_nodos, with_labels=False, node_size=300)
     nombres = nx.get_node_attributes(grafo_metro.grafo, "nombre")
-    linea = nx.get_node_attributes(grafo_metro.grafo, "linea")
-    nx.draw_networkx_labels(grafo_metro.grafo, pos, labels = nombres, font_size = 10)
-    nx.draw_networkx_labels(grafo_metro.grafo, pos, labels=linea, font_size=10)
+    ############################
+    # Dibujar nombres una sola vez
+    nombres_dibujados = set()
+    etiquetas_nombres = {}
+    etiquetas_lineas = {}
+    for n, data in grafo_metro.grafo.nodes(data=True):
+        nombre = data["nombre"]
+        if nombre not in nombres_dibujados:
+            etiquetas_nombres[n] = nombre
+            lineas = tabla_estaciones.obtener_lineas(nombre)
+            etiquetas_lineas[n] = ", ".join(lineas)
+            nombres_dibujados.add(nombre)
+    ############################
+    # Desplazar ligeramente las etiquetas de línea
+    pos_lineas = {n: (x, y - 0.003) for n, (x, y) in pos.items() if n in etiquetas_lineas}
+
+    nx.draw_networkx_labels(grafo_metro.grafo, pos, labels=etiquetas_nombres, font_size=8)
+    nx.draw_networkx_labels(grafo_metro.grafo, pos_lineas, labels=etiquetas_lineas, font_size=7)
     peso_aristas = nx.get_edge_attributes(grafo_metro.grafo, "weight")
-    nx.draw_networkx_edge_labels(grafo_metro.grafo, pos, edge_labels = peso_aristas, font_size = 10)
+    nx.draw_networkx_edge_labels(grafo_metro.grafo, pos, edge_labels=peso_aristas, font_size=7)
     plt.show()
 
 
