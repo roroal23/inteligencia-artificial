@@ -227,3 +227,4 @@ Garibaldi,8,Garibaldi,B,1800
 Guerrero,B,Guerrero,3,1440
 Balderas,3,Balderas,1,1440
 Centro Médico,9,Centro Médico,3,1440
+Pantitlán,1,Pantitlán,5,1080
