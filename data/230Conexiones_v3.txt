@@ -194,12 +194,12 @@ Parque de los Venados,12,Zapata,12,563
 Zapata,12,Hospital 20 de Noviembre,12,450
 Hospital 20 de Noviembre,12,Insurgentes Sur,12,725
 Insurgentes Sur,12,Mixcoac,12,651
-Atlalilco,8,Atlalilco,12,20
-Pantitlán,1,Pantitlán,A,14
-Ermita,2,Ermita,12,14
-La Raza,5,La Raza,3,12
-Consulado,5,Consulado,4,11
-Instituto del Petróleo,5,Instituto del Petróleo,6,11
+Atlalilco,8,Atlalilco,12,7200
+Pantitlán,1,Pantitlán,A,5040
+Ermita,2,Ermita,12,5040
+La Raza,5,La Raza,3,4320
+Consulado,5,Consulado,4,3960
+Instituto del Petróleo,5,Instituto del Petróleo,6,3960
 Pantitlán,1,Pantitlán,9,3960
 Pantitlán,5,Pantitlán,A,3600
 Jamaica,4,Jamaica,9,3240
