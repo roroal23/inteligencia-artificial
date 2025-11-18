@@ -1,0 +1,24 @@
+import json
+import os  
+from dotenv import load_dotenv    
+import requests
+if __name__ == '__main__':
+    jsons = {}
+    lista_estaciones = ["Pantitlán","Zaragoza","Gómez Farías","Boulevard Puerto Aéreo","Balbuena","Moctezuma","San Lázaro","Candelaria","Merced","Pino Suárez","Isabel la Católica","Salto del Agua","Balderas","Cuauhtémoc","Insurgentes","Sevilla","Chapultepec","Juanacatlán","Tacubaya","Observatorio","Cuatro Caminos","Panteones","Cuitláhuac","Popotla","Colegio Militar","Normal","San Cosme","Revolución","Hidalgo","Allende","Zócalo","San Antonio Abad","Chabacano","Viaducto","Xola","Villa de Cortés","Nativitas","Portales","Ermita","General Anaya","Tasqueña","Indios Verdes","Deportivo 18 de Marzo","Potrero","La Raza","Tlatelolco","Guerrero","Juárez","Niños Héroes","Hospital General","Centro Médico","Etiopía/Plaza de la Transparencia","Eugenia","División del Norte","Zapata","Coyoacán","Viveros/Derechos Humanos","Miguel Ángel de Quevedo","Copilco","Universidad","Martín Carrera","Talismán","Bondojito","Consulado","Canal del Norte","Morelos","Fray Servando","Jamaica","Santa Anita","Hangares","Terminal Aérea","Oceanía","Aragón","Eduardo Molina","Valle Gómez","Misterios","Autobuses del Norte","Instituto del Petróleo","Politécnico","El Rosario","Tezozómoc","Azcapotzalco","Ferrería","Norte 45","Vallejo","Lindavista","La Villa-Basílica","Aquíles Serdán","Camarones","Refinería","Tacuba","San Joaquín","Polanco","Auditorio","Constituyentes","San Pedro de los Pinos","San Antonio","Mixcoac","Barranca del Muerto","Garibaldi","Bellas Artes","San Juan de Letrán","Doctores","Obrera","La Viga","Coyuya","Iztacalco","Apatlaco","Aculco","Escuadrón 201","Atlalilco","Iztapalapa","Cerro de la Estrella","UAM I","Constitución de 1917","Patriotismo","Chilpancingo","Lázaro Cárdenas","Mixiuhca","Velódromo","Ciudad Deportiva","Puebla","Agrícola Oriental","Canal de San Juan","Tepalcates","Guelatao","Peñón Viejo","Acatitla","Santa Marta","Los Reyes","La Paz","Ciudad Azteca","Plaza Aragón","Olímpica","Ecatepec","Múzquiz","Río de los Remedios","Impulsora","Nezahualcóyotl","Villa de Aragón","Bosques de Aragón","Deportivo Oceanía","Romero Rubio","Ricardo Flores Magón","Tepito","Lagunilla","Buenavista","Tláhuac","Tlaltenco","Zapotitlán","Nopalera","Olivos","Tezonco","Periférico Oriente","Calle 11","Lomas Estrella","San Andrés Tomatlán","Culhuacán","Mexicaltzingo","Eje Central","Parque de los Venados","Hospital 20 de Noviembre","Insurgentes Sur"]
+    load_dotenv(dotenv_path=".venv/GEOCODING_API_KEY.env")
+    API_KEY = os.getenv("GEOCODING_API_KEY")
+    print("INICIO PROGRAMA...")
+    with open ("./data/todas_las_solicitudes.txt", "w",encoding="utf-8") as f:   
+        for estacion in lista_estaciones:
+            estacion_buscar = (f"Metro {estacion},Mexico City,Mexico")
+            url = "https://maps.googleapis.com/maps/api/geocode/json"
+            params = {
+                "address": estacion_buscar,
+                "key": (str) (API_KEY)
+            }
+            respuesta = requests.get(url,params=params)
+            jsons[estacion] = respuesta.json()
+            f.write(f"ESTACION: {estacion}: \n {json.dumps(respuesta.json())} \n---------------------------------------------------------------------------------\n")
+    with open("./data/estaciones_metro.json", "w",encoding="utf-8") as f:
+        json.dump(jsons, f, indent=2, ensure_ascii=False)
+    print("FIN PROGRAMA.")
