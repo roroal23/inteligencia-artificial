@@ -27,6 +27,17 @@ class LectorFichero():
                     estaciones.append((partes[0], partes[1]))
         return estaciones
 
+    @staticmethod
+    def obtener_estaciones_163() -> list[str]:
+        estaciones: list[str] = []
+        estaciones_unico: str = "data/163Estaciones.txt"
+        with open(estaciones_unico, "r", encoding = "utf-8") as fichero:
+            for linea in fichero:
+                linea = linea.strip()
+                if linea:
+                    estaciones.append(linea)
+        return estaciones
+
     """Lee las conexiones entre estaciones y devuelve una lista de conexiones: [origen, linea_o, destino, linea_d, peso]"""
     def obtener_conexiones(self) -> list[tuple[str, str, str, str, int]]:
         conexiones: list[tuple[str, str, str, str, int]] = []
