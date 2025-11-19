@@ -1,8 +1,8 @@
-import networkx as nx
+import networkx as nx #librería para grafos
 import matplotlib.pyplot as plt
 
 """
-CONFIGURACION
+CONFIGURACION: rutas a ficheros de datos
 """
 FICHERO_ESTACIONES = "data/195Estaciones_v2.txt"
 FICHERO_CONEXIONES = "data/229Conexiones_v2.txt"
@@ -42,7 +42,6 @@ class LectorFichero():
     def obtener_conexiones(self) -> list[tuple[str, str, str, str, int]]:
         conexiones: list[tuple[str, str, str, str, int]] = []
         with open(self.fichero_conexiones, "r", encoding = "utf-8") as fichero:
-
             for linea in fichero:
                 linea = linea.strip()
                 if linea:
@@ -56,11 +55,11 @@ class TablaEstaciones():
         Ademas contiene un mapa que relaciona el nombre de estacion con las lineas a las que pertenece
     """
     def __init__(self, estaciones: list[tuple[str,str]]):
-        self.estacion_a_id : dict[tuple[str,str], int] = {}
-        self.id_a_estacion : dict[int, tuple[str,str]] = {}
-        self.estacion_a_lineas : dict[str, list[str]] = {}
+        self.estacion_a_id : dict[tuple[str,str], int] = {} # (nombre,línea)->id
+        self.id_a_estacion : dict[int, tuple[str,str]] = {} # (nombre,línea)<-id
+        self.estacion_a_lineas : dict[str, list[str]] = {} # nombre -> lista de líneas de esa estación para hacer transbordos
         self.estaciones = estaciones
-        self.transbordos : set[str] = set()
+        self.transbordos : set[str] = set() # Conjunto de estaciones que pertenecen a 2 o más líneas
         self.rellenar_mapas()
 
     def rellenar_mapas(self):
@@ -89,7 +88,7 @@ class TablaEstaciones():
 
     def obtener_lineas(self, nombre: str) -> list[str]:
         return self.estacion_a_lineas[nombre]
-
+    # ejemplo: "Tacubaya" -> ["1", "7", "9"]
 
 class GrafoMetro():
     """Crea y almacena el grafo del metro de la CDMX"""
