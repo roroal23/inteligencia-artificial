@@ -2,6 +2,7 @@ import sys
 from PySide6 import QtWidgets, QtCore, QtGui
 import networkx as nx
 from creacion_grafo_v2 import LectorFichero, TablaEstaciones, GrafoMetro
+import math
 
 class getCoordenadas(QtWidgets.QWidget):
     def __init__(self):
@@ -25,6 +26,29 @@ class getCoordenadas(QtWidgets.QWidget):
     def getC(self, nombre: str) -> tuple[float, float]:
         return self.ESTACIONES[nombre]
 
+    def distancia_menor(self, estacion1:str, estacion2:str) -> float:
+        """ Devulve la distancia en línea recta entre dos estaciones en METROS
+            usando la fórmula de Haversine sobre una Tierra esférica"""
+        lat1_deg, lon1_deg = self.getC(estacion1)
+        lat2_deg, lon2_deg = self.getC(estacion1)
+
+        # Pasar a radianes
+        lat1 = math.radians(lat1_deg)
+        lon1 = math.radians(lon1_deg)
+        lat2 = math.radians(lat2_deg)
+        lon2 = math.radians(lon2_deg)
+
+        dlat = lat2-lat1
+        dlon = lon2-lon1
+
+        # Haversine
+
+        a = math.sin(dlat/2)**2 + math.cos(lat1)*math.cos(lat2)*math.sin(dlon/2)**2
+        c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+
+        R = 6371000 # radio de la Tierra en metros
+        distancia_metros = R*c
+        return distancia_metros
 
 class MapaWidget(QtWidgets.QWidget):
     def __init__(self):
