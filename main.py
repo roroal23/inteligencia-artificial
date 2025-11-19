@@ -2,6 +2,12 @@
 import sys
 
 from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6.QtCore import Qt
+from PySide6.QtSvg import QSvgRenderer
+from PySide6.QtSvgWidgets import *
+from PySide6.QtWebEngineWidgets import *
+from PySide6.QtWidgets import QSizePolicy
+
 from creacion_grafo_v2 import LectorFichero
 
 
@@ -56,14 +62,14 @@ class MainScreen(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
-        self.mapa = QtWidgets.QLabel(self)
-        self.pixmap = QtGui.QPixmap("data/Mexico_City_metro.png")
-        self.pixmap = self.pixmap.scaled(QtCore.QSize(800,600), QtCore.Qt.AspectRatioMode.KeepAspectRatio, QtCore.Qt.TransformationMode.SmoothTransformation)
-        self.mapa.setPixmap(self.pixmap)
+        self.mapa = QSvgWidget("data/Mexico_City_metro.svg")
+        self.mapa.setFixedSize(530,600)
+        self.mapa.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+
         self.textos = CajasTexto()
 
         self.hbox = QtWidgets.QHBoxLayout()
-        self.hbox.insertWidget(0, self.mapa)
+        self.hbox.addWidget(self.mapa)
         self.hbox.addWidget(self.textos)
 
 
