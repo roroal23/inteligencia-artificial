@@ -3,6 +3,7 @@ import sys
 
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtSvgWidgets import *
 from PySide6.QtWebEngineWidgets import *
@@ -39,13 +40,20 @@ class CajasTexto(QtWidgets.QWidget):
         self.boton2 = QtWidgets.QPushButton("Limpiar")
         self.texto = QtWidgets.QLineEdit()
         self.texto2 = QtWidgets.QLineEdit()
+        self.origenTexto = QtWidgets.QLabel("Origen: ")
+        self.destinoTexto = QtWidgets.QLabel("Destino: ")
 
         self.texto.setCompleter(self.completador)
         self.texto2.setCompleter(self.completador)
 
+        self.texto.setPlaceholderText("Introduce el origen")
+        self.texto2.setPlaceholderText("Introduce el destino")
+
         self.boton2.clicked.connect(self.limpiar)
 
+        self.vbox.addWidget(self.origenTexto)
         self.vbox.addWidget(self.texto)
+        self.vbox.addWidget(self.destinoTexto)
         self.vbox.addWidget(self.texto2)
         self.hbox.addWidget(self.boton1)
         self.hbox.addWidget(self.boton2)
@@ -62,6 +70,14 @@ class MainScreen(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
+        self.CajaInicio = QtWidgets.QVBoxLayout()
+        self.CajaInicio.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        self.Titulo = QtWidgets.QLabel("<html><img src='data/Logo.svg' width='30' height='30'></html> Buscador Metro CDMX")
+
+        self.Titulo.setFont(QtGui.QFont("Arial", 24, QFont.Bold))
+
+        self.CajaInicio.addWidget(self.Titulo)
+
         self.mapa = QSvgWidget("data/Mexico_City_metro.svg")
         self.mapa.setFixedSize(530,600)
         self.mapa.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
@@ -71,15 +87,17 @@ class MainScreen(QtWidgets.QWidget):
         self.hbox = QtWidgets.QHBoxLayout()
         self.hbox.addWidget(self.mapa)
         self.hbox.addWidget(self.textos)
+        self.CajaInicio.addWidget(self.Titulo)
+        self.CajaInicio.addLayout(self.hbox)
 
-
-        self.setLayout(self.hbox)
+        self.setLayout(self.CajaInicio)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-
+    app.setApplicationDisplayName("Buscador Metro CDMX")
+    app.setWindowIcon(QtGui.QIcon("data/logo.svg"))
     widget = MainScreen()
     widget.resize(1024, 720)
+    widget.setWindowFlag(QtCore.Qt.WindowType.MSWindowsFixedSizeDialogHint)
     widget.show()
-
     sys.exit(app.exec_())
