@@ -74,7 +74,7 @@ class MapaWidget(QtWidgets.QWidget):
         print(f"Clic en ({x},{y})")
 
     def add_ruta(self, nombres_estaciones, color=QtCore.Qt.red):
-        gc = getCoordenadas()
+        gc = GetCoordenadas()
         coords = []
         for nombre in nombres_estaciones:
             if nombre in gc.ESTACIONES:  # tanto normales como aux deben estar en el fichero
@@ -203,25 +203,18 @@ class CajasTexto(QtWidgets.QWidget):
         # 1. Comprobamos que no están vacíos
         if not origen:
             self.texto.setStyleSheet("border: 2px solid red;")
-            #self.texto.setPlaceholderText("Es necesario rellenar el origen")
             mensajes_error.append("Es necesario rellenar el campo origen.")
-            #self.label_estado.setStyleSheet("color: red;")
             error = True
 
         if not destino:
             self.texto2.setStyleSheet("border: 2px solid red;")
-            #self.texto2.setPlaceholderText("Es necesario rellenar el destino")
             mensajes_error.append("Es necesario rellenar el campo destino.")
-            #self.label_estado.setStyleSheet("color: red;")
             error = True
 
         # Comprobar que existen en la lista de estaciones válidas
         if origen and origen not in self.estaciones:
-            #self.texto.clear()
             self.texto.setStyleSheet("border: 2px solid red;")
-            #self.texto.setPlaceholderText("Estación de origen no válida")
             mensajes_error.append("Estación de origen no válida.")
-            #self.label_estado.setStyleSheet("color: red;")
             error = True
 
         if destino and destino not in self.estaciones:
@@ -232,8 +225,6 @@ class CajasTexto(QtWidgets.QWidget):
         if not error and origen == destino:
             self.texto.setStyleSheet("border: 2px solid red;")
             self.texto2.setStyleSheet("border: 2px solid red;")
-            #self.texto.setPlaceholderText("Origen y destino no pueden ser iguales")
-            #self.texto2.setPlaceholderText("Origen y destino no pueden ser iguales")
             mensajes_error.append("Origen y destino no pueden ser iguales.")
             self.label_estado.setStyleSheet("color: red;")
             error = True
@@ -281,26 +272,27 @@ class CajasTexto(QtWidgets.QWidget):
             nombre_est, linea_est = self.tabla_estaciones.obtener_estacion(nodo_id)
             estaciones_camino_optimo.append((nombre_est, linea_est))
 
+        # Código necesario para mostrar el trayecto con las estaciones y los transbordos necesarios
         lineas_salida=[]
         prev_nombre = None
         prev_linea = None
 
         for nombre, linea in estaciones_camino_optimo:
             if prev_nombre is None:
-                lineas_salida.append(nombre) # primera estación
-            else:
+                lineas_salida.append(nombre) # Metes la primera estación
+            else: #si no esla primera estación, compruebas si es transbordo. Si no lo es, es la siguiente parada
                 if nombre == prev_nombre and linea != prev_linea:
                     #transbordo
-                    lineas_salida.append(f"Transbordo de línea {prev_linea} a línea {linea}")
+                    lineas_salida.append(f"Transbordo de la línea {prev_linea} a la línea {linea}")
                 elif nombre != prev_nombre:
                     # Siguiente estacion
                     lineas_salida.append(nombre)
-            prev_nombre,prev_linea = nombre,linea # siguiente estación
+            prev_nombre,prev_linea = nombre,linea # para la siguiente iteración
 
         texto_camino = "\n".join(lineas_salida)
 
         # Calculamos el Tiempo Estimado
-        vel_m_h = 25000 # 25km/h
+        vel_m_h = 25000 # promedio del tren es de 25km/h
         tiempo_min_totales = (mejor_coste/vel_m_h) * 60
         minutos_totales = int(round(tiempo_min_totales))
 
@@ -323,6 +315,7 @@ class CajasTexto(QtWidgets.QWidget):
         )
         self.label_estado.setStyleSheet("color: green;")
 
+        # Dibujar en el mapa
         nombres_camino = [nombre for (nombre,linea) in estaciones_camino_optimo]
         self.mapa.add_ruta(nombres_camino, color=QtCore.Qt.red)
 
