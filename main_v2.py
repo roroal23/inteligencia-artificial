@@ -4,7 +4,7 @@ import networkx as nx
 from creacion_grafo_v2 import LectorFichero, TablaEstaciones, GrafoMetro
 import math
 
-class getCoordenadas(QtWidgets.QWidget):
+class GetCoordenadas(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
 
@@ -30,7 +30,7 @@ class getCoordenadas(QtWidgets.QWidget):
         """ Devulve la distancia en línea recta entre dos estaciones en METROS
             usando la fórmula de Haversine sobre una Tierra esférica"""
         lat1_deg, lon1_deg = self.getC(estacion1)
-        lat2_deg, lon2_deg = self.getC(estacion1)
+        lat2_deg, lon2_deg = self.getC(estacion2)
 
         # Pasar a radianes
         lat1 = math.radians(lat1_deg)
@@ -312,7 +312,7 @@ class CajasTexto(QtWidgets.QWidget):
             if minutos == 0:
                 texto_tiempo = f"{horas} horas."
             else:
-                texto_tiempo = f"{minutos} minutos."
+                texto_tiempo = f"{horas} horas {minutos} minutos."
 
         num_estaciones = len(mejor_camino) - 1
         # Mostrar resultado
