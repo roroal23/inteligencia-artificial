@@ -3,7 +3,7 @@ import json
 if __name__ == '__main__':
     #Representacion de las lineas como listas de paradas (o puntos intermedios) para pintar
     lineas = {
-        "1": ("Observatorio","Tacubaya","Juanacatlán","Chapultepec","Sevilla","aux1L1","Cuauhtémoc","Balderas","Salto del Agua","Isabel la Católica","Pino Suárez","aux2L1","Merced","Candelaria","San Lázaro","Moctezuma","Balbuena","aux3L1","Boulevard Puerto Aéreo","aux4L1","Gómez Farías","Zaragoza","aux5L1","Pantitlán"),
+        "1": ("Observatorio","Tacubaya","Juanacatlán","Chapultepec","Sevilla","aux1L1","Insurgentes","Cuauhtémoc","Balderas","Salto del Agua","Isabel la Católica","Pino Suárez","aux2L1","Merced","Candelaria","San Lázaro","Moctezuma","Balbuena","aux3L1","Boulevard Puerto Aéreo","aux4L1","Gómez Farías","Zaragoza","aux5L1","Pantitlán"),
         "2":("Cuatro Caminos","Panteones","Cuitláhuac","Popotla","aux1L2","Colegio Militar","Normal","San Cosme","Revolución","Hidalgo","Bellas Artes","aux2L2","Allende","aux3L2","Zócalo","Pino Suárez","San Antonio Abad","Chabacano","Viaducto","Xola","Villa de Cortés","Nativitas","Portales","Ermita","General Anaya","Tasqueña"),
         "3":("Indios Verdes","Deportivo 18 de Marzo","aux1L3","Potrero","La Raza","Tlatelolco","aux2L3","Guerrero","Hidalgo","Juárez","Balderas","Niños Héroes","Hospital General","Centro Médico","Etiopía/Plaza de la Transparencia","Eugenia","División del Norte","Zapata","Coyoacán","Viveros/Derechos Humanos","Miguel Ángel de Quevedo","Copilco","Universidad"),
         "4":("Martín Carrera","Talismán","Bondojito", "Consulado","Canal del Norte","Morelos","Candelaria","Fray Servando","Jamaica","Santa Anita"),
