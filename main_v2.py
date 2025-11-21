@@ -85,8 +85,8 @@ class CajasTexto(QtWidgets.QWidget):
         self.boton2 = QtWidgets.QPushButton("Limpiar")
         self.texto = QtWidgets.QLineEdit()
         self.texto2 = QtWidgets.QLineEdit()
-        self.origenTexto = QtWidgets.QLabel("Origen: ")
-        self.destinoTexto = QtWidgets.QLabel("Destino: ")
+        self.origenTexto = QtWidgets.QLabel("Estación origen: ")
+        self.destinoTexto = QtWidgets.QLabel("Estación destino: ")
 
         # asociamos el autocompletador
         self.texto.setCompleter(self.completador)
@@ -111,6 +111,7 @@ class CajasTexto(QtWidgets.QWidget):
         self.hbox.addWidget(self.boton1)
         self.hbox.addWidget(self.boton2)
         self.vbox.addLayout(self.hbox)
+        self.vbox.addWidget(self.label_estado)
 
         self.setLayout(self.vbox)
 
