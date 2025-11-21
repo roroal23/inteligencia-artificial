@@ -1,0 +1,162 @@
+LA CONEXION Moctezuma, San Lázaro HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Juanacatlán, Tacubaya HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Colegio Militar, Normal HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Zócalo, Pino Suárez HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Pino Suárez, San Antonio Abad HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Antonio Abad, Chabacano HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Chabacano, Viaducto HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Viaducto, Xola HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Xola, Villa de Cortés HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Villa de Cortés, Nativitas HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Nativitas, Portales HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Portales, Ermita HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Ermita, General Anaya HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Zócalo, Pino Suárez HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Pino Suárez, San Antonio Abad HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Antonio Abad, Chabacano HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Chabacano, Viaducto HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Viaducto, Xola HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Xola, Villa de Cortés HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Villa de Cortés, Nativitas HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Nativitas, Portales HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Portales, Ermita HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Ermita, General Anaya HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION La Raza, Tlatelolco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Tlatelolco, Guerrero HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Guerrero, Hidalgo HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Hidalgo, Juárez HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Juárez, Balderas HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Balderas, Niños Héroes HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Niños Héroes, Hospital General HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Hospital General, Centro Médico HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Centro Médico, Etiopía/Plaza de la Transparencia HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Etiopía/Plaza de la Transparencia, Eugenia HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Eugenia, División del Norte HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION División del Norte, Zapata HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Viveros/Derechos Humanos, Miguel Ángel de Quevedo HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Copilco, Universidad HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Santa Anita, Jamaica HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Jamaica, Fray Servando HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Fray Servando, Candelaria HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Candelaria, Morelos HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Morelos, Canal del Norte HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Canal del Norte, Consulado HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Consulado, Bondojito HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Bondojito, Talismán HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Talismán, Martín Carrera HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Politécnico, Instituto del Petróleo HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Instituto del Petróleo, Autobuses del Norte HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Autobuses del Norte, La Raza HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Eduardo Molina, Aragón HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Aragón, Oceanía HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Oceanía, Terminal Aérea HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Camarones, Refinería HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Tacuba, San Joaquín HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Joaquín, Polanco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Polanco, Auditorio HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Auditorio, Constituyentes HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Constituyentes, Tacubaya HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Tacubaya, San Pedro de los Pinos HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Pedro de los Pinos, San Antonio HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Antonio, Mixcoac HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Mixcoac, Barranca del Muerto HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Garibaldi, Bellas Artes HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Bellas Artes, San Juan de Letrán HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION San Juan de Letrán, Salto del Agua HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Salto del Agua, Doctores HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Doctores, Obrera HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Coyuya, Iztacalco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Iztacalco, Apatlaco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Apatlaco, Aculco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Aculco, Escuadrón 201 HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Ciudad Azteca, Plaza Aragón HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Plaza Aragón, Olímpica HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Olímpica, Ecatepec HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Ecatepec, Múzquiz HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Múzquiz, Río de los Remedios HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Río de los Remedios, Impulsora HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Impulsora, Nezahualcóyotl HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Guerrero, Buenavista HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Culhuacán, Atlalilco HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
+LA CONEXION Pantitlán, Pantitlán HA SIDO CAMBIADA CORRECTAMENTE
+-----------------------------------------------------
