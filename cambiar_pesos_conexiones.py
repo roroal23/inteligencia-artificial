@@ -11,22 +11,6 @@ from PySide6.QtWebEngineWidgets import *
 from PySide6.QtWidgets import QSizePolicy
 import math
 
-class GetCoordenadas():
-    def __init__(self):
-        super().__init__()
-        self.json_solicitudes = {}
-        self.ESTACIONES = {}
-        with open(file="data/163CoordInterfaz.txt", mode="r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    parts = line.split(",")
-                    self.ESTACIONES[parts[0]] = (float(parts[1]), float(parts[2]))
-        with open("./data/estaciones_metro2.json", "r", encoding="utf-8") as f:
-            self.json_solicitudes = json.load(f)
-
-    def getc(self, nombre: str) -> tuple[float, float]:
-        return self.ESTACIONES[nombre]
 def minimoTrasbordos(origen, destino) -> int:
     trasbordos = {
         "1": {"1": 0,"2": 1,"3": 1,"4": 1,"5": 1,"6": 2, "7": 1, "8": 1, "9": 1, "A": 1, "B": 1, "12": 2},
@@ -56,35 +40,27 @@ def calcularDistancia(coordsOrigen,coordsDestino) -> int:
     coordenadas_origen = (radio_tierra*math.cos(latOrigen)*math.cos(longOrigen),radio_tierra*math.cos(latOrigen)*math.sin(longOrigen),radio_tierra*math.sin(latOrigen))
     coordenadas_destino = (radio_tierra * math.cos(latDestino) * math.cos(longDestino), radio_tierra * math.cos(latDestino) * math.sin(longDestino), radio_tierra * math.sin(latDestino))
     return round(math.sqrt( (coordenadas_origen[0] - coordenadas_destino[0]) **2 + (coordenadas_origen[1] - coordenadas_destino[1]) **2 + (coordenadas_origen[2] - coordenadas_destino[2]) **2 ))
+
     #Heurística. TODO: revisar que sea minorante en todos los casos
 def heuristica (origen, destino) -> int:
     with open("./data/estaciones_metro2.json", "r", encoding="utf-8") as f:
         data = json.load(f)
-    retorno = (calcularDistancia(data[origen["nombre"]]["results"][0]["geometry"].get("location", ()),  data[destino["nombre"]]["results"][0]["geometry"].get("location",()))
+        return (calcularDistancia(data[origen["nombre"]]["results"][0]["geometry"].get("location", ()),  data[destino["nombre"]]["results"][0]["geometry"].get("location",()))
             + minimoTrasbordos(origen["linea"],destino["linea"]) * 1080)
-    if retorno < 0:
-        print("SE HA ENCONTRADO HEURISTICA MENOR QUE 0")
-    return retorno
 
-if __name__ == "__main__":
-    print("SE HA CREADO CONEXIONES")
-    coords = GetCoordenadas()
-    print("SE HA CREADO COORDS")
-    with open("data/230Conexiones_v4.txt", "r", encoding="utf-8") as fichero:
-        with open("data/fallos_heuristica.txt", "w", encoding="utf-8") as fallos:
-            for linea in fichero:
-                linea = linea.strip()
-                if linea:
-                    partes = linea.split(",")
-                    origen = {"nombre" : partes[0], "linea":partes[1]}
-                    destino = {"nombre": partes[2], "linea": partes[3]}
-                    dist_calculada = heuristica(origen,destino)
-                    #fallos.write(f"SE HA OBTENIDO {partes[4]},  HEURISTICA {dist_calculada}")
-                    print(f"SE HA CALCULADO LA DISTANCIA {dist_calculada} Y EL VALOR DEL FICHERO ES {partes[4]}")
-                    if dist_calculada > int(partes[4]):
-                        fallos.write(f"\nERROR EN LA HEURISTICA, DISTANCIA ENTRE {partes[0]} y {partes[2]} = {int(partes[4])}, PERO LA HEURISTICA DICE {dist_calculada}")
-                        fallos.write("\n---------------------------------------------------------------------------------------------------------------------------------------\n")
-                    elif dist_calculada == int(partes[4]):
-                        fallos.write(f"LA CONEXION {partes[0]}, {partes[2]} HA SIDO CAMBIADA CORRECTAMENTE\n-----------------------------------------------------\n")
-    print("SE HA TERMINADO DE COMPROBAR")
-
+if __name__ == '__main__':
+    with open("./data/230Conexiones_v3.txt", "r", encoding="utf-8") as f:
+        conexiones = []
+        for line in f:
+            line = line.strip()
+            if line:
+                parts = line.split(",")
+                origen = {"nombre": parts[0], "linea": parts[1]}
+                destino = {"nombre": parts[2], "linea": parts[3]}
+                dist_calculada = heuristica(origen, destino)
+                if dist_calculada > int(parts[4]):
+                    parts[4] = dist_calculada
+                conexiones.append(parts)
+    with open("./data/230Conexiones_v4.txt", "w", encoding="utf-8") as f:
+        for conexion in conexiones:
+            f.write(f"{conexion[0]},{conexion[1]},{conexion[2]},{conexion[3]},{conexion[4]}\n")
