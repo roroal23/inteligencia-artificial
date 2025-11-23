@@ -6,7 +6,7 @@ import PySide6
 import networkx as nx
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
+from PySide6.QtGui import QFont, QPainter, QPalette, QPixmap, QColor
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtSvgWidgets import *
 from PySide6.QtWebEngineWidgets import *
@@ -59,10 +59,21 @@ class GetCoordenadas(QtWidgets.QWidget):
 class CajasTexto(QtWidgets.QWidget):
     def __init__(self, mapa):
         super().__init__()
-
         self.mapa = mapa
         self.estaciones = LectorFichero.obtener_estaciones_163()
         self.textos = []
+        self.scroll = QtWidgets.QScrollArea()
+        self.scroll.setBackgroundRole(QPalette.Dark)
+        self.scroll.setWidgetResizable(False)
+        self.lineaRuta = LineaRutaDibujo(self.scroll)
+        self.resumenruta = QtWidgets.QLabel(f"Tiempo de viaje: --\nNumero de Paradas: --")
+        self.titulodatos = QtWidgets.QLabel("Datos:")
+        self.titulodatos.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Bold))
+        self.tituloruta = QtWidgets.QLabel("Ruta:")
+        self.tituloruta.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Bold))
+        self.resumenruta.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Bold))
+
+
         for estacion in self.estaciones:
             self.textos.append(estacion)
 
@@ -108,6 +119,7 @@ class CajasTexto(QtWidgets.QWidget):
         self.boton2.clicked.connect(self.limpiar)
 
         # añade widgets al layout
+        self.vbox.addWidget(self.titulodatos)
         self.vbox.addWidget(self.origenTexto)
         self.vbox.addWidget(self.texto)
         self.vbox.addWidget(self.destinoTexto)
@@ -115,7 +127,12 @@ class CajasTexto(QtWidgets.QWidget):
         self.hbox.addWidget(self.boton1)
         self.hbox.addWidget(self.boton2)
         self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(self.label_estado)
+        self.vbox.addWidget(self.tituloruta)
+        self.vbox.addWidget(self.scroll)
+        self.vbox.addWidget(self.resumenruta)
+        self.lineaRuta.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.scroll.setWidget(self.lineaRuta)
+        self.scroll.setAlignment(QtCore.Qt.AlignHCenter)
         self.setLayout(self.vbox)
         self.minimo_trasbordos = {
             "1": {"1": 0, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 1, "8": 1, "9": 1, "A": 1, "B": 1, "12": 2},
@@ -164,14 +181,16 @@ class CajasTexto(QtWidgets.QWidget):
         # Resetear cajas y label
         self.texto.setStyleSheet("")
         self.texto2.setStyleSheet("")
-        self.texto.setPlaceholderText("Origen")
-        self.texto2.setPlaceholderText("Destino")
+        #self.texto.setPlaceholderText("Origen")
+        #self.texto2.setPlaceholderText("Destino")
 
         # limpiar mensaje de estado
+        self.resumenruta.setText(f"Tiempo de viaje: --\nNumero de Paradas: --")
         self.label_estado.clear()
         self.label_estado.setStyleSheet("")
 
         # limpiamos el mapa
+        self.lineaRuta.reinicio()
         self.mapa.limpiar_rutas()
 
 
@@ -182,8 +201,8 @@ class CajasTexto(QtWidgets.QWidget):
         # Reseteamos cajas y label
         self.texto.setStyleSheet("")
         self.texto2.setStyleSheet("")
-        self.texto.setPlaceholderText("Origen")
-        self.texto2.setPlaceholderText("Destino")
+        #self.texto.setPlaceholderText("Origen")
+        #self.texto2.setPlaceholderText("Destino")
         self.label_estado.clear()
         self.label_estado.setStyleSheet("")
         #Limpiamos el mapa
@@ -272,7 +291,7 @@ class CajasTexto(QtWidgets.QWidget):
         for nombre, linea in estaciones_camino_optimo:
             if prev_nombre is None:
                 lineas_salida.append(nombre) # Metes la primera estación
-            else: #si no esla primera estación, compruebas si es transbordo. Si no lo es, es la siguiente parada
+            else: #si no es la primera estación, compruebas si es transbordo. Si no lo es, es la siguiente parada
                 if nombre == prev_nombre and linea != prev_linea:
                     #transbordo
                     lineas_salida.append(f"Transbordo de la línea {prev_linea} a la línea {linea}")
@@ -306,11 +325,79 @@ class CajasTexto(QtWidgets.QWidget):
                                   f"Tiempo estimado de tu trayecto: {texto_tiempo}\n"
         )
         self.label_estado.setStyleSheet("color: green;")
+        self.resumenruta.setText(f"Tiempo de viaje: {texto_tiempo}\nNumero de Paradas: {num_estaciones}")
 
         # Dibujar en el mapa
         #TODO: BORRAR SI NO NECESARIO
         # nombres_camino = [nombre for (nombre,linea) in estaciones_camino_optimo]
         self.mapa.add_ruta(estaciones_camino_optimo, color=QtCore.Qt.red)
+        self.lineaRuta.add_ruta(estaciones_camino_optimo)
+
+
+class LineaRutaDibujo(QtWidgets.QWidget):
+    aumento = 30
+    inicio = 50
+    ruta = []
+    def __init__(self, scroll):
+        super().__init__()
+        #self.setStyleSheet("background: transparent;")
+        self.scroll = scroll
+        self.setStyleSheet("background: transparent;")
+        self.resize(380,self.inicio)
+        self.puntomedio = puntoMedio = int(self.width()/2)
+
+    def redimension(self):
+        self.resize(self.width(), self.height() + self.aumento)
+        self.inicio += self.aumento
+
+    def add_ruta(self, rutap):
+        self.reinicio()
+        self.ruta = rutap
+        self.resize(self.width(), self.height() + self.aumento * len(rutap))
+        self.update()
+
+    def reinicio(self):
+        self.resize(self.width(), self.inicio)
+        self.ruta.clear()
+
+    def paintEvent(self, event):
+
+        painter = QtGui.QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
+        painter.setPen(QtGui.QPen(QtCore.Qt.red, 10))
+        for i in range(len(self.ruta)):
+            pos = self.inicio + self.aumento*i
+            painter.setPen(QtGui.QPen(QtCore.Qt.white, 10))
+            painter.drawText(QtCore.QPointF(self.puntomedio + 12, pos + 4), self.ruta[i][0])
+            painter.setPen(QtGui.QPen(self.linea_color(self.ruta[i][1]), 10))
+            painter.drawEllipse(QtCore.QPointF(self.puntomedio, pos), 5, 5)
+
+            if i < len(self.ruta)-1:
+                painter.drawLine(QtCore.QPointF(self.puntomedio, pos), QtCore.QPointF(self.puntomedio, pos + self.aumento))
+                if self.ruta[i][1] != self.ruta[i + 1][1]:
+                    painter.setPen(QtGui.QPen(QtCore.Qt.white, 10))
+                    painter.drawText(QtCore.QPointF(self.puntomedio - 185, pos + (self.aumento/2)+1), f"Transbordo de linea: {self.ruta[i][1]} a linea: {self.ruta[i+1][1]}\n")
+
+
+    def linea_color(self, linea) -> QtGui.QColor:
+        switcher = {
+            "1": QColor.fromRgb(211, 85, 144),
+            "2": QColor.fromRgb(1, 124, 192),
+            "3": QColor.fromRgb(158, 154, 58),
+            "4": QColor.fromRgb(150, 207, 184),
+            "5": QColor.fromRgb(250, 195, 3),
+            "6": QColor.fromRgb(217, 38, 26),
+            "7": QColor.fromRgb(238, 149, 58),
+            "8": QColor.fromRgb(3, 146, 63),
+            "9": QColor.fromRgb(141, 85, 68),
+            "A": QColor.fromRgb(143, 30, 116),
+            "B": QColor.fromRgb(169, 169, 169),
+            "12": QColor.fromRgb(184, 157, 78),
+        }
+        return switcher.get(linea)
+
+
+
 
 class RutasWidget(QtWidgets.QWidget):
     def __init__(self, parent=None, label_estado=None):
@@ -364,33 +451,33 @@ class RutasWidget(QtWidgets.QWidget):
 
     def add_ruta(self,ruta, color=QtCore.Qt.red):
         """Recibe una lista de nombres de estaciones y construye (nombre, (x,y))."""
-        print(f"RUTA RECIBIDA: {ruta}")
+        #print(f"RUTA RECIBIDA: {ruta}")
         coords : list[tuple[str, tuple[float, float]]] = []
         for i in range(len(ruta)-1):
             origen = str(ruta[i][0])
             linea_origen = str(ruta[i][1])
             destino = str(ruta[i+1][0])
             linea_destino = str(ruta[i+1][1])
-            print(f"origen {origen} destino {destino} linea_o {linea_origen} linea_d {linea_destino}")
+            #print(f"origen {origen} destino {destino} linea_o {linea_origen} linea_d {linea_destino}")
             if linea_origen == linea_destino:
                 index_origen = self.lineas[linea_origen].index(origen)
                 index_destino = self.lineas[linea_destino].index(destino)
                 inicio = min(index_origen, index_destino)
                 fin = max(index_origen, index_destino)
-                print(f"ORIGEN {origen} DESTINO {destino}")
+                #print(f"ORIGEN {origen} DESTINO {destino}")
                 lista_add = []
                 for j in range(inicio, fin+1):
                     nombre_pintar = str(self.lineas[linea_origen][j])
                     coordenadas_pintar = self.coordenadas.getc(nombre_pintar)
                     entrada_coordenadas = (nombre_pintar, coordenadas_pintar)
                     if coords.count(entrada_coordenadas) == 0:
-                        print(f"SE HA AÑADIDO: {entrada_coordenadas}")
+                        #print(f"SE HA AÑADIDO: {entrada_coordenadas}")
                         lista_add.append(entrada_coordenadas)
                 if index_destino < index_origen:
                     lista_add.reverse()
                 for entrada in lista_add:
                     coords.append(entrada)
-        print(f"LA LISTA DE COORDENADAS ES {coords}")
+        #print(f"LA LISTA DE COORDENADAS ES {coords}")
         entrada_rutas = (color, coords)
         self.rutas.append(entrada_rutas)
         self.update()
@@ -401,6 +488,7 @@ class RutasWidget(QtWidgets.QWidget):
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
         for color, estaciones in self.rutas:
             # líneas entre estaciones consecutivas
             painter.setPen(QtGui.QPen(color, 2))
@@ -417,7 +505,7 @@ class RutasWidget(QtWidgets.QWidget):
                     painter.drawEllipse(QtCore.QPointF(x, y), 5, 5)
 
 
-def mousePressEvent(self, event: QtGui.QMouseEvent):
+    def mousePressEvent(self, event: QtGui.QMouseEvent):
         # Coordenadas del clic relativas al overlay (coinciden con el mapa)
         x = event.position().x()
         y = event.position().y()
@@ -456,6 +544,7 @@ class MainScreen(QtWidgets.QWidget):
         self.overlay.setGeometry(self.mapa.rect())  # mismo tamaño que el mapa
         self.overlay.raise_()  # subir en el eje Z por encima del mapa
 
+
         # Cajas de texto (pasamos overlay porque es quien tiene add_ruta/limpiar_rutas)
         self.textos = CajasTexto(self.overlay)
 
@@ -463,6 +552,7 @@ class MainScreen(QtWidgets.QWidget):
         self.hbox = QtWidgets.QHBoxLayout()
         self.hbox.addWidget(self.mapa)
         self.hbox.addWidget(self.textos)
+        #self.textos.setStyleSheet("CajasTexto#textos {}")
 
         # Añadir todo al layout principal
         self.CajaInicio.addLayout(self.hbox)

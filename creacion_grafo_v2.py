@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 CONFIGURACION
 """
 FICHERO_ESTACIONES = "data/195Estaciones_v2.txt"
-FICHERO_CONEXIONES = "data/230Conexiones_v%.txt"
+FICHERO_CONEXIONES = "data/230Conexiones_v5.txt"
 
 """
 CLASES
