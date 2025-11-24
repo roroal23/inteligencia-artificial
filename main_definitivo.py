@@ -330,7 +330,7 @@ class CajasTexto(QtWidgets.QWidget):
         # Dibujar en el mapa
         #TODO: BORRAR SI NO NECESARIO
         # nombres_camino = [nombre for (nombre,linea) in estaciones_camino_optimo]
-        self.mapa.add_ruta(estaciones_camino_optimo, color= QColor(0, 255, 160))
+        self.mapa.add_ruta(estaciones_camino_optimo, color= QColor(0, 255, 60))
         self.lineaRuta.add_ruta(estaciones_camino_optimo)
 
 
@@ -449,7 +449,7 @@ class RutasWidget(QtWidgets.QWidget):
         }
         self.coordenadas = GetCoordenadas()
 
-    def add_ruta(self,ruta, color=QColor(0,255,160)):
+    def add_ruta(self,ruta, color=QColor(0,255,60)):
         """Recibe una lista de nombres de estaciones y construye (nombre, (x,y))."""
         #print(f"RUTA RECIBIDA: {ruta}")
         coords : list[tuple[str, tuple[float, float]]] = []
