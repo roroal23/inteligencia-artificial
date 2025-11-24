@@ -127,6 +127,7 @@ class CajasTexto(QtWidgets.QWidget):
         self.hbox.addWidget(self.boton1)
         self.hbox.addWidget(self.boton2)
         self.vbox.addLayout(self.hbox)
+        self.vbox.addWidget(self.label_estado)
         self.vbox.addWidget(self.tituloruta)
         self.vbox.addWidget(self.scroll)
         self.vbox.addWidget(self.resumenruta)
@@ -571,3 +572,4 @@ if __name__ == "__main__":
     widget.setWindowFlag(QtCore.Qt.WindowType.MSWindowsFixedSizeDialogHint)
     widget.show()
     sys.exit(app.exec())
+
