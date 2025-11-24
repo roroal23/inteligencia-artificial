@@ -320,12 +320,12 @@ class CajasTexto(QtWidgets.QWidget):
 
         num_estaciones = len(mejor_camino) - 1
         # Mostrar resultado
-        self.label_estado.setText(f"Camino más rápido entre {origen} y {destino}:\n\n"
-                                  f"{texto_camino}\n\n"
-                                  f"El número total de paradas son: {num_estaciones}\n"
-                                  f"Tiempo estimado de tu trayecto: {texto_tiempo}\n"
-        )
-        self.label_estado.setStyleSheet("color: green;")
+        #self.label_estado.setText(f"Camino más rápido entre {origen} y {destino}:\n\n"
+        #                          f"{texto_camino}\n\n"
+        #                          f"El número total de paradas son: {num_estaciones}\n"
+        #                          f"Tiempo estimado de tu trayecto: {texto_tiempo}\n"
+        #)
+        #self.label_estado.setStyleSheet("color: green;")
         self.resumenruta.setText(f"Tiempo de viaje: {texto_tiempo}\nNumero de Paradas: {num_estaciones}")
 
         # Dibujar en el mapa
@@ -572,4 +572,5 @@ if __name__ == "__main__":
     widget.setWindowFlag(QtCore.Qt.WindowType.MSWindowsFixedSizeDialogHint)
     widget.show()
     sys.exit(app.exec())
+
 
