@@ -520,7 +520,12 @@ class RutasWidget(QtWidgets.QWidget):
 class MainScreen(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
+        app.setStyleSheet("""
+            QWidget {background-color: #181818;color: white;}
+            QLineEdit {background-color: #2a2a2a;color: white;}
+            QPushButton {background-color: #3a3a3a;color: white;}
+            QTextEdit {background-color: #202020;color: white;}
+        """)
         # Layout principal
         self.CajaInicio = QtWidgets.QVBoxLayout()
         self.CajaInicio.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
