@@ -330,7 +330,7 @@ class CajasTexto(QtWidgets.QWidget):
         # Dibujar en el mapa
         #TODO: BORRAR SI NO NECESARIO
         # nombres_camino = [nombre for (nombre,linea) in estaciones_camino_optimo]
-        self.mapa.add_ruta(estaciones_camino_optimo, color=QtCore.Qt.red)
+        self.mapa.add_ruta(estaciones_camino_optimo, color= QColor(0, 255, 160))
         self.lineaRuta.add_ruta(estaciones_camino_optimo)
 
 
@@ -449,7 +449,7 @@ class RutasWidget(QtWidgets.QWidget):
         }
         self.coordenadas = GetCoordenadas()
 
-    def add_ruta(self,ruta, color=QtCore.Qt.red):
+    def add_ruta(self,ruta, color=QColor(0,255,160)):
         """Recibe una lista de nombres de estaciones y construye (nombre, (x,y))."""
         #print(f"RUTA RECIBIDA: {ruta}")
         coords : list[tuple[str, tuple[float, float]]] = []
@@ -490,8 +490,9 @@ class RutasWidget(QtWidgets.QWidget):
         painter = QtGui.QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
         for color, estaciones in self.rutas:
+            print(color.name())
             # líneas entre estaciones consecutivas
-            painter.setPen(QtGui.QPen(color, 2))
+            painter.setPen(QtGui.QPen(color, 6))
             for i in range(len(estaciones) - 1):
                 _, (x1, y1) = estaciones[i]
                 _, (x2, y2) = estaciones[i + 1]
