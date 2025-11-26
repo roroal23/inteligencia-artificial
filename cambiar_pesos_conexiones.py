@@ -1,16 +1,6 @@
-
-import sys
 import json
-import networkx as nx
-from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
-from PySide6.QtSvg import QSvgRenderer
-from PySide6.QtSvgWidgets import *
-from PySide6.QtWebEngineWidgets import *
-from PySide6.QtWidgets import QSizePolicy
 import math
-
+#Funcion que devuelve el número mínimo de trasbordos entre dos paradas
 def minimoTrasbordos(origen, destino) -> int:
     trasbordos = {
         "1": {"1": 0,"2": 1,"3": 1,"4": 1,"5": 1,"6": 2, "7": 1, "8": 1, "9": 1, "A": 1, "B": 1, "12": 2},
@@ -29,6 +19,7 @@ def minimoTrasbordos(origen, destino) -> int:
     }
     return trasbordos[origen][destino]
 
+#Cálculo de distancia entre dos coordenadas utilizando distancia Euclídea
 def calcularDistancia(coordsOrigen,coordsDestino) -> int:
     print(coordsOrigen)
     print(coordsDestino)
@@ -41,13 +32,15 @@ def calcularDistancia(coordsOrigen,coordsDestino) -> int:
     coordenadas_destino = (radio_tierra * math.cos(latDestino) * math.cos(longDestino), radio_tierra * math.cos(latDestino) * math.sin(longDestino), radio_tierra * math.sin(latDestino))
     return round(math.sqrt( (coordenadas_origen[0] - coordenadas_destino[0]) **2 + (coordenadas_origen[1] - coordenadas_destino[1]) **2 + (coordenadas_origen[2] - coordenadas_destino[2]) **2 ))
 
-    #Heurística. TODO: revisar que sea minorante en todos los casos
+# Heurística = distancia euclídea + (mínimoTrasbordos * 1080 (trasbordo más corto))
 def heuristica (origen, destino) -> int:
     with open("./data/estaciones_metro2.json", "r", encoding="utf-8") as f:
         data = json.load(f)
         return (calcularDistancia(data[origen["nombre"]]["results"][0]["geometry"].get("location", ()),  data[destino["nombre"]]["results"][0]["geometry"].get("location",()))
             + minimoTrasbordos(origen["linea"],destino["linea"]) * 1080)
 
+#Si la heurística da un valor mayor que el valor actual en la conexión, se cambia el valor de la conexión
+#para que tome el valor de la heurística (así heurística <= coste)
 if __name__ == '__main__':
     with open("./data/230Conexiones_v3.txt", "r", encoding="utf-8") as f:
         conexiones = []

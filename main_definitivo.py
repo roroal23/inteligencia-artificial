@@ -20,7 +20,7 @@ import json
 class GetCoordenadas(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-
+        #asociamos a cada estacion sus coordenadas.
         self.ESTACIONES = {}
         with open(file="data/163CoordInterfaz.txt", mode="r", encoding="utf-8") as f:
             for line in f:
@@ -28,7 +28,7 @@ class GetCoordenadas(QtWidgets.QWidget):
                 if line:
                     parts = line.split(",")
                     self.ESTACIONES[parts[0]] = (float(parts[1]), float(parts[2]))
-
+    """obtener las coordenadas del estacion"""
     def getc(self, nombre: str) -> tuple[float, float]:
         return self.ESTACIONES[nombre]
 
@@ -475,7 +475,7 @@ class RutasWidget(QtWidgets.QWidget):
                    "Zapata", "Hospital 20 de Noviembre", "Insurgentes Sur", "Mixcoac")
         }
         self.coordenadas = GetCoordenadas()
-
+    """anade una estacion en la lista ruta."""
     def add_ruta(self,ruta, color=QColor(0,255,60)):
         """Recibe una lista de nombres de estaciones y construye (nombre, (x,y))."""
         #print(f"RUTA RECIBIDA: {ruta}")
@@ -486,9 +486,13 @@ class RutasWidget(QtWidgets.QWidget):
             destino = str(ruta[i+1][0])
             linea_destino = str(ruta[i+1][1])
             #print(f"origen {origen} destino {destino} linea_o {linea_origen} linea_d {linea_destino}")
+
+            #si origen y destino pertenecen a la misma linea.
             if linea_origen == linea_destino:
+                #obtener los indices de origen y destino.
                 index_origen = self.lineas[linea_origen].index(origen)
                 index_destino = self.lineas[linea_destino].index(destino)
+                #rango de indices
                 inicio = min(index_origen, index_destino)
                 fin = max(index_origen, index_destino)
                 #print(f"ORIGEN {origen} DESTINO {destino}")
@@ -497,35 +501,39 @@ class RutasWidget(QtWidgets.QWidget):
                     nombre_pintar = str(self.lineas[linea_origen][j])
                     coordenadas_pintar = self.coordenadas.getc(nombre_pintar)
                     entrada_coordenadas = (nombre_pintar, coordenadas_pintar)
+                    #evita añadir estaciones duplicadas a la lista de coordenadas.
                     if coords.count(entrada_coordenadas) == 0:
                         #print(f"SE HA AÑADIDO: {entrada_coordenadas}")
                         lista_add.append(entrada_coordenadas)
+                #invierte la lista si destino va antes de origen.
                 if index_destino < index_origen:
                     lista_add.reverse()
+                #anade las estaciones de este tramo a la lista de coordenadas.
                 for entrada in lista_add:
                     coords.append(entrada)
         #print(f"LA LISTA DE COORDENADAS ES {coords}")
         entrada_rutas = (color, coords)
+        #almacena la nueva ruta para luego pintarla.
         self.rutas.append(entrada_rutas)
         self.update()
-
+    """vaciar la lista ruta"""
     def limpiar_rutas(self):
         self.rutas.clear()
         self.update()
-
+    """pintar la ruta en el mapa situado en la parte izquierda"""
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
         for color, estaciones in self.rutas:
             #print(color.name())
-            # líneas entre estaciones consecutivas
+            # pintar las líneas entre estaciones consecutivas
             painter.setPen(QtGui.QPen(color, 6))
             for i in range(len(estaciones) - 1):
                 _, (x1, y1) = estaciones[i]
                 _, (x2, y2) = estaciones[i + 1]
                 painter.drawLine(x1, y1, x2, y2)
 
-            # círculos en cada estación (excepto nombres 'aux')
+            # pintar círculos en cada estación (excepto nombres 'aux')
             painter.setPen(QtGui.QPen(color, 1))  # borde
             painter.setBrush(QtGui.QBrush(color))  # relleno
             for nombre, (x, y) in estaciones:
