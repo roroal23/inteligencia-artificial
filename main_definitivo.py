@@ -1,16 +1,9 @@
-
 import sys
-from sys import flags
-
-import PySide6
 import networkx as nx
 from PySide6 import QtWidgets, QtCore, QtGui
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont, QPainter, QPalette, QPixmap, QColor
-from PySide6.QtSvg import QSvgRenderer
+from PySide6.QtGui import QPainter, QPalette, QColor
 from PySide6.QtSvgWidgets import *
-from PySide6.QtWebEngineWidgets import *
-from PySide6.QtWidgets import QSizePolicy
 
 from creacion_grafo_v2 import LectorFichero, TablaEstaciones, GrafoMetro
 import math
@@ -62,10 +55,8 @@ class CajasTexto(QtWidgets.QWidget):
         self.mapa = mapa #Obtiene el overlay de dibujado de la ruta en el mapa
         #Llama a una funcion para obtener una lista con el nombre de las estaciones
         self.estaciones = LectorFichero.obtener_estaciones_163()
-        #self.textos = []
         #Inicializa la zona de scroll para el dibujado de la ruta en línea
         self.scroll = QtWidgets.QScrollArea()
-        #self.scroll.setBackgroundRole(QPalette.Dark)
         self.scroll.setWidgetResizable(False) #El scroll no fuerza cambio de tamaño
 
         #Inicializa la zona de dibujado para la ruta en linea
@@ -194,8 +185,6 @@ class CajasTexto(QtWidgets.QWidget):
         # Resetear cajas y label
         self.texto.setStyleSheet("")
         self.texto2.setStyleSheet("")
-        #self.texto.setPlaceholderText("Origen")
-        #self.texto2.setPlaceholderText("Destino")
 
         # limpiar mensaje de estado
         self.resumenruta.setText(f"Tiempo de viaje: --\nNumero de Paradas: --")
@@ -214,8 +203,6 @@ class CajasTexto(QtWidgets.QWidget):
         # Reseteamos cajas y label
         self.texto.setStyleSheet("")
         self.texto2.setStyleSheet("")
-        #self.texto.setPlaceholderText("Origen")
-        #self.texto2.setPlaceholderText("Destino")
         self.label_estado.clear()
         self.label_estado.setStyleSheet("")
         #Limpiamos el mapa
@@ -316,7 +303,7 @@ class CajasTexto(QtWidgets.QWidget):
         texto_camino = "\n".join(lineas_salida)
 
         # Calculamos el Tiempo Estimado
-        vel_m_h = 21600 # promedio del tren es de 25km/h
+        vel_m_h = 21600 # promedio del tren es de 21.6km/h
         tiempo_min_totales = (mejor_coste/vel_m_h) * 60
         minutos_totales = int(round(tiempo_min_totales))
 
@@ -332,17 +319,9 @@ class CajasTexto(QtWidgets.QWidget):
 
         num_estaciones = len(mejor_camino) - 1
         # Mostrar resultado
-        #self.label_estado.setText(f"Camino más rápido entre {origen} y {destino}:\n\n"
-        #                          f"{texto_camino}\n\n"
-        #                          f"El número total de paradas son: {num_estaciones}\n"
-        #                          f"Tiempo estimado de tu trayecto: {texto_tiempo}\n"
-        #)
-        #self.label_estado.setStyleSheet("color: green;")
         self.resumenruta.setText(f"Tiempo de viaje: {texto_tiempo}\nNumero de Paradas: {num_estaciones}")
 
         # Dibujar en el mapa
-        #TODO: BORRAR SI NO NECESARIO
-        # nombres_camino = [nombre for (nombre,linea) in estaciones_camino_optimo]
         self.mapa.add_ruta(estaciones_camino_optimo, color= QColor(0, 255, 60))
         self.lineaRuta.add_ruta(estaciones_camino_optimo)
 
@@ -485,7 +464,6 @@ class RutasWidget(QtWidgets.QWidget):
             linea_origen = str(ruta[i][1])
             destino = str(ruta[i+1][0])
             linea_destino = str(ruta[i+1][1])
-            #print(f"origen {origen} destino {destino} linea_o {linea_origen} linea_d {linea_destino}")
 
             #si origen y destino pertenecen a la misma linea.
             if linea_origen == linea_destino:
@@ -495,7 +473,6 @@ class RutasWidget(QtWidgets.QWidget):
                 #rango de indices
                 inicio = min(index_origen, index_destino)
                 fin = max(index_origen, index_destino)
-                #print(f"ORIGEN {origen} DESTINO {destino}")
                 lista_add = []
                 for j in range(inicio, fin+1):
                     nombre_pintar = str(self.lineas[linea_origen][j])
@@ -503,7 +480,6 @@ class RutasWidget(QtWidgets.QWidget):
                     entrada_coordenadas = (nombre_pintar, coordenadas_pintar)
                     #evita añadir estaciones duplicadas a la lista de coordenadas.
                     if coords.count(entrada_coordenadas) == 0:
-                        #print(f"SE HA AÑADIDO: {entrada_coordenadas}")
                         lista_add.append(entrada_coordenadas)
                 #invierte la lista si destino va antes de origen.
                 if index_destino < index_origen:
@@ -511,7 +487,6 @@ class RutasWidget(QtWidgets.QWidget):
                 #anade las estaciones de este tramo a la lista de coordenadas.
                 for entrada in lista_add:
                     coords.append(entrada)
-        #print(f"LA LISTA DE COORDENADAS ES {coords}")
         entrada_rutas = (color, coords)
         #almacena la nueva ruta para luego pintarla.
         self.rutas.append(entrada_rutas)
@@ -525,7 +500,6 @@ class RutasWidget(QtWidgets.QWidget):
         painter = QtGui.QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
         for color, estaciones in self.rutas:
-            #print(color.name())
             # pintar las líneas entre estaciones consecutivas
             painter.setPen(QtGui.QPen(color, 6))
             for i in range(len(estaciones) - 1):
@@ -541,26 +515,10 @@ class RutasWidget(QtWidgets.QWidget):
                     painter.drawEllipse(QtCore.QPointF(x, y), 5, 5)
 
 
-    def mousePressEvent(self, event: QtGui.QMouseEvent):
-        # Coordenadas del clic relativas al overlay (coinciden con el mapa)
-        x = event.position().x()
-        y = event.position().y()
-        print(f"Clic en (,{x:.1f},{y:.1f})")
-        if self.label_estado is not None:
-            self.label_estado.setText(f"Clic en coordenadas: ({x:.1f}, {y:.1f})")
-        # No llamar a super().mousePressEvent para evitar propagación si no quieres
-
-
 class MainScreen(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-#        app.setStyleSheet("""
-#                    QWidget {background-color: #181818;color: white;}
-#                    QLineEdit {background-color: #2a2a2a;color: white;}
-#                    QPushButton {background-color: #3a3a3a;color: white;}
-#                   QTextEdit {background-color: #202020;color: white;}
-#                """)
-#        app.setStyleSheet("""""")
+
         # Layout principal con alineación siempre en la zona superior de la ventana
         self.CajaInicio = QtWidgets.QVBoxLayout()
         self.CajaInicio.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
@@ -594,7 +552,6 @@ class MainScreen(QtWidgets.QWidget):
         self.hbox = QtWidgets.QHBoxLayout()
         self.hbox.addWidget(self.mapa)
         self.hbox.addWidget(self.textos)
-        #self.textos.setStyleSheet("CajasTexto#textos {}")
 
         # Añadir todo al layout principal
         self.CajaInicio.addLayout(self.hbox)
@@ -622,5 +579,3 @@ if __name__ == "__main__":
     #Muestra la pantalla principal en la aplicación e inicia ejecución de la interfaz
     widget.show()
     sys.exit(app.exec())
-
-
