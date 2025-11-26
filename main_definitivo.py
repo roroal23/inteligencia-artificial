@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter, QPalette, QColor
 from PySide6.QtSvgWidgets import *
 
-from creacion_grafo_v2 import LectorFichero, TablaEstaciones, GrafoMetro
+from creacion_grafo import LectorFichero, TablaEstaciones, GrafoMetro
 import math
 import json
 
@@ -579,3 +579,4 @@ if __name__ == "__main__":
     #Muestra la pantalla principal en la aplicación e inicia ejecución de la interfaz
     widget.show()
     sys.exit(app.exec())
+
