@@ -345,6 +345,7 @@ class LineaRutaDibujo(QtWidgets.QWidget):
         self.scroll = scroll
         self.setStyleSheet("background: transparent;")
         self.resize(380,self.inicio)
+        self.textocolor = QtWidgets.QLabel()
         self.puntomedio = puntoMedio = int(self.width()/2)
 
     def redimension(self):
@@ -368,7 +369,7 @@ class LineaRutaDibujo(QtWidgets.QWidget):
         painter.setPen(QtGui.QPen(QtCore.Qt.red, 10))
         for i in range(len(self.ruta)):
             pos = self.inicio + self.aumento*i
-            painter.setPen(QtGui.QPen(QtCore.Qt.white, 10))
+            painter.setPen(QtGui.QPen(self.textocolor.palette().color(QPalette.WindowText), 10))
             painter.drawText(QtCore.QPointF(self.puntomedio + 12, pos + 4), self.ruta[i][0])
             painter.setPen(QtGui.QPen(self.linea_color(self.ruta[i][1]), 10))
             painter.drawEllipse(QtCore.QPointF(self.puntomedio, pos), 5, 5)
@@ -376,7 +377,7 @@ class LineaRutaDibujo(QtWidgets.QWidget):
             if i < len(self.ruta)-1:
                 painter.drawLine(QtCore.QPointF(self.puntomedio, pos), QtCore.QPointF(self.puntomedio, pos + self.aumento))
                 if self.ruta[i][1] != self.ruta[i + 1][1]:
-                    painter.setPen(QtGui.QPen(QtCore.Qt.white, 10))
+                    painter.setPen(QtGui.QPen(self.textocolor.palette().color(QPalette.WindowText), 10))
                     painter.drawText(QtCore.QPointF(self.puntomedio - 185, pos + (self.aumento/2)+1), f"Transbordo de linea: {self.ruta[i][1]} a linea: {self.ruta[i+1][1]}\n")
 
 
@@ -520,12 +521,13 @@ class RutasWidget(QtWidgets.QWidget):
 class MainScreen(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
-        app.setStyleSheet("""
-            QWidget {background-color: #181818;color: white;}
-            QLineEdit {background-color: #2a2a2a;color: white;}
-            QPushButton {background-color: #3a3a3a;color: white;}
-            QTextEdit {background-color: #202020;color: white;}
-        """)
+#        app.setStyleSheet("""
+#                    QWidget {background-color: #181818;color: white;}
+#                    QLineEdit {background-color: #2a2a2a;color: white;}
+#                    QPushButton {background-color: #3a3a3a;color: white;}
+#                   QTextEdit {background-color: #202020;color: white;}
+#                """)
+#        app.setStyleSheet("""""")
         # Layout principal
         self.CajaInicio = QtWidgets.QVBoxLayout()
         self.CajaInicio.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)

@@ -216,6 +216,7 @@ Mixcoac,7,Mixcoac,12,2520
 Salto del Agua,1,Salto del Agua,8,2160
 San Lázaro,B,San Lázaro,1,2160
 Morelos,4,Morelos,B,2160
+Pantitlán,9,Pantitlán,1,2160
 Santa Anita,8,Santa Anita,4,2160
 Zapata,3,Zapata,12,2160
 Tacubaya,1,Tacubaya,7,2160
@@ -227,4 +228,7 @@ Garibaldi,8,Garibaldi,B,1800
 Guerrero,B,Guerrero,3,1440
 Balderas,3,Balderas,1,1440
 Centro Médico,9,Centro Médico,3,1440
+Oceanía,5,Oceanía,B,1080
 Pantitlán,1,Pantitlán,5,1080
+Hidalgo,3,Hidalgo,2,720
+El Rosario,6,El Rosario,7,720
