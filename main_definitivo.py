@@ -461,9 +461,13 @@ class RutasWidget(QtWidgets.QWidget):
             destino = str(ruta[i+1][0])
             linea_destino = str(ruta[i+1][1])
             #print(f"origen {origen} destino {destino} linea_o {linea_origen} linea_d {linea_destino}")
+
+            #si origen y destino pertenecen a la misma linea.
             if linea_origen == linea_destino:
+                #obtener los indices de origen y destino.
                 index_origen = self.lineas[linea_origen].index(origen)
                 index_destino = self.lineas[linea_destino].index(destino)
+                #rango de indices
                 inicio = min(index_origen, index_destino)
                 fin = max(index_origen, index_destino)
                 #print(f"ORIGEN {origen} DESTINO {destino}")
@@ -472,15 +476,19 @@ class RutasWidget(QtWidgets.QWidget):
                     nombre_pintar = str(self.lineas[linea_origen][j])
                     coordenadas_pintar = self.coordenadas.getc(nombre_pintar)
                     entrada_coordenadas = (nombre_pintar, coordenadas_pintar)
+                    #evita añadir estaciones duplicadas a la lista de coordenadas.
                     if coords.count(entrada_coordenadas) == 0:
                         #print(f"SE HA AÑADIDO: {entrada_coordenadas}")
                         lista_add.append(entrada_coordenadas)
+                #invierte la lista si destino va antes de origen.
                 if index_destino < index_origen:
                     lista_add.reverse()
+                #anade las estaciones de este tramo a la lista de coordenadas.
                 for entrada in lista_add:
                     coords.append(entrada)
         #print(f"LA LISTA DE COORDENADAS ES {coords}")
         entrada_rutas = (color, coords)
+        #almacena la nueva ruta para luego pintarla.
         self.rutas.append(entrada_rutas)
         self.update()
     """vaciar la lista ruta"""
