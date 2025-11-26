@@ -59,13 +59,19 @@ class GetCoordenadas(QtWidgets.QWidget):
 class CajasTexto(QtWidgets.QWidget):
     def __init__(self, mapa):
         super().__init__()
-        self.mapa = mapa
+        self.mapa = mapa #Obtiene el overlay de dibujado de la ruta en el mapa
+        #Llama a una funcion para obtener una lista con el nombre de las estaciones
         self.estaciones = LectorFichero.obtener_estaciones_163()
-        self.textos = []
+        #self.textos = []
+        #Inicializa la zona de scroll para el dibujado de la ruta en línea
         self.scroll = QtWidgets.QScrollArea()
-        self.scroll.setBackgroundRole(QPalette.Dark)
-        self.scroll.setWidgetResizable(False)
-        self.lineaRuta = LineaRutaDibujo(self.scroll)
+        #self.scroll.setBackgroundRole(QPalette.Dark)
+        self.scroll.setWidgetResizable(False) #El scroll no fuerza cambio de tamaño
+
+        #Inicializa la zona de dibujado para la ruta en linea
+        self.lineaRuta = LineaRutaDibujo()
+
+        #Inicializa los textos para la interfaz
         self.resumenruta = QtWidgets.QLabel(f"Tiempo de viaje: --\nNumero de Paradas: --")
         self.titulodatos = QtWidgets.QLabel("Datos:")
         self.titulodatos.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Bold))
@@ -74,13 +80,16 @@ class CajasTexto(QtWidgets.QWidget):
         self.resumenruta.setFont(QtGui.QFont("Arial", 16, QtGui.QFont.Bold))
 
 
-        for estacion in self.estaciones:
-            self.textos.append(estacion)
+        #for estacion in self.estaciones:
+        #    self.textos.append(estacion)
 
-        # Sección autocompletardor
-        self.completador = QtWidgets.QCompleter(self.textos)
+        # Inicializa el autocompletado para las zonas donde introducir las estaciones
+        # Ignora las mayusculas y también incluye nombres que contengas la cadena de
+        # textos introducida
+        self.completador = QtWidgets.QCompleter(self.estaciones)
         self.completador.setCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
         self.completador.setFilterMode(Qt.MatchFlag.MatchContains)
+
         # CONSTRUCCIÓN DEL GRAFO DEL METRO
         ficheros = LectorFichero()  # ficheros para leer estaciones y conexiones
         estaciones_grafo = ficheros.obtener_estaciones()  # lista de tuplas de estaciones. Ej: ("Observatorio","1")
@@ -89,24 +98,26 @@ class CajasTexto(QtWidgets.QWidget):
         self.grafo_metro = GrafoMetro(self.tabla_estaciones, estaciones_grafo, conexiones)
         # -----
 
+        #Inicializa el layout vertical donde colocar los widgets de la interfaz
         self.vbox = QtWidgets.QVBoxLayout()
-        self.hbox = QtWidgets.QHBoxLayout()
-        self.vbox.setSpacing(3)
-        self.vbox.setContentsMargins(0,50,0,0)
-        self.vbox.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        self.hbox = QtWidgets.QHBoxLayout() #Layout horizontal para los botones de buscar y limpiar
+        self.vbox.setSpacing(3) #Espacio entre widgets
+        self.vbox.setContentsMargins(0,10,0,0)  #Margenes de la interfaz
+        self.vbox.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop) #Alineación en la parte superior del layout
 
         # cajas de texto y botones
-        self.boton1 = QtWidgets.QPushButton("Buscar")
-        self.boton2 = QtWidgets.QPushButton("Limpiar")
-        self.texto = QtWidgets.QLineEdit()
-        self.texto2 = QtWidgets.QLineEdit()
-        self.origenTexto = QtWidgets.QLabel("Origen: ")
-        self.destinoTexto = QtWidgets.QLabel("Destino: ")
+        self.boton1 = QtWidgets.QPushButton("Buscar")   #Boton de busqueda
+        self.boton2 = QtWidgets.QPushButton("Limpiar")  #Boton de limpiar ruta
+        self.texto = QtWidgets.QLineEdit()              #Texto para introducir el origen de la ruta
+        self.texto2 = QtWidgets.QLineEdit()             #Texto para introducir el destino de la ruta
+        self.origenTexto = QtWidgets.QLabel("Origen: ") #Texto de interfaz
+        self.destinoTexto = QtWidgets.QLabel("Destino: ")   #Texto de interfaz
 
-        # asociamos el autocompletador
+        #Asocia los autocompletados a las cajas de texto
         self.texto.setCompleter(self.completador)
         self.texto2.setCompleter(self.completador)
 
+        #Establece textos default para los campos de introducción de texto
         self.texto.setPlaceholderText("Introduce el origen")
         self.texto2.setPlaceholderText("Introduce el destino")
 
@@ -114,11 +125,11 @@ class CajasTexto(QtWidgets.QWidget):
         self.label_estado = QtWidgets.QLabel("")
         self.label_estado.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
-        # conectamos los botones
+        # Conecta los botones de buscar y limpiar con sus respectivas funciones
         self.boton1.clicked.connect(self.buscar)
         self.boton2.clicked.connect(self.limpiar)
 
-        # añade widgets al layout
+        # Añade todos los widgets necesarios al layout
         self.vbox.addWidget(self.titulodatos)
         self.vbox.addWidget(self.origenTexto)
         self.vbox.addWidget(self.texto)
@@ -131,6 +142,7 @@ class CajasTexto(QtWidgets.QWidget):
         self.vbox.addWidget(self.tituloruta)
         self.vbox.addWidget(self.scroll)
         self.vbox.addWidget(self.resumenruta)
+        #El tamaño de la linea de ruta puede expandirse
         self.lineaRuta.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         self.scroll.setWidget(self.lineaRuta)
         self.scroll.setAlignment(QtCore.Qt.AlignHCenter)
@@ -336,51 +348,64 @@ class CajasTexto(QtWidgets.QWidget):
 
 
 class LineaRutaDibujo(QtWidgets.QWidget):
-    aumento = 30
-    inicio = 50
-    ruta = []
-    def __init__(self, scroll):
+    aumento = 30    #Cantidad de pixeles que debe de haber entre puntos de parada
+    inicio = 50     #Ubicación por donde la linea debe empezar a ser dibujada
+    ruta = []       #Array contiendo la ruta a dibujar junto con las lineas a las que pertenece
+    def __init__(self):
         super().__init__()
-        #self.setStyleSheet("background: transparent;")
-        self.scroll = scroll
+        #Inicializa el color y tamaño de la zona de scroll
         self.setStyleSheet("background: transparent;")
         self.resize(380,self.inicio)
+
+        #Texto donde sacar la paleta de colores para dibujar los textos
         self.textocolor = QtWidgets.QLabel()
+
+        #Punto medio de la zona de scroll
         self.puntomedio = puntoMedio = int(self.width()/2)
 
-    def redimension(self):
-        self.resize(self.width(), self.height() + self.aumento)
-        self.inicio += self.aumento
-
+    #Reinicia el estado de dibujado, añade la ruta pasada como parámetro
+    # y redimensiona el widget basado en el número de paradas
     def add_ruta(self, rutap):
         self.reinicio()
         self.ruta = rutap
         self.resize(self.width(), self.height() + self.aumento * len(rutap))
         self.update()
 
+    #Reinicia el tamaño del widget y limpia la ruta
     def reinicio(self):
         self.resize(self.width(), self.inicio)
         self.ruta.clear()
 
+    #Dibuja la ruta en el widget basado en la ruta
     def paintEvent(self, event):
-
+        #Inicializa el dibujado con Antialiasing
         painter = QtGui.QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
-        painter.setPen(QtGui.QPen(QtCore.Qt.red, 10))
+
+        #Inicia el dibujado de la ruta
         for i in range(len(self.ruta)):
+            #Establece la ubicación de una estación basado en su posicion en la lista
             pos = self.inicio + self.aumento*i
+            #Cambia color de dibujado a la paleta de color de texto de la aplicación con tamaño 10
             painter.setPen(QtGui.QPen(self.textocolor.palette().color(QPalette.WindowText), 10))
+            #Dibuja nombre de la estación
             painter.drawText(QtCore.QPointF(self.puntomedio + 12, pos + 4), self.ruta[i][0])
+            #Cambia el color al correspondiente con la linea a la que la estación pertenece
             painter.setPen(QtGui.QPen(self.linea_color(self.ruta[i][1]), 10))
+            #Dibuja punto que representa la estacion
             painter.drawEllipse(QtCore.QPointF(self.puntomedio, pos), 5, 5)
 
             if i < len(self.ruta)-1:
+                #Dibuja la línea que conecta los puntos de las estaciones
                 painter.drawLine(QtCore.QPointF(self.puntomedio, pos), QtCore.QPointF(self.puntomedio, pos + self.aumento))
+                #Detecta si ocurre un transborso de linea, si lo hay dibuja un texto indicando entre las dos estaciones
+                #identicas
                 if self.ruta[i][1] != self.ruta[i + 1][1]:
                     painter.setPen(QtGui.QPen(self.textocolor.palette().color(QPalette.WindowText), 10))
                     painter.drawText(QtCore.QPointF(self.puntomedio - 185, pos + (self.aumento/2)+1), f"Transbordo de linea: {self.ruta[i][1]} a linea: {self.ruta[i+1][1]}\n")
 
-
+    #Función que devuelve un color dependiendo de la linea de metro que se pase
+    #por parámetro
     def linea_color(self, linea) -> QtGui.QColor:
         switcher = {
             "1": QColor.fromRgb(211, 85, 144),
@@ -500,7 +525,7 @@ class RutasWidget(QtWidgets.QWidget):
         painter = QtGui.QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
         for color, estaciones in self.rutas:
-            print(color.name())
+            #print(color.name())
             # pintar las líneas entre estaciones consecutivas
             painter.setPen(QtGui.QPen(color, 6))
             for i in range(len(estaciones) - 1):
@@ -536,18 +561,18 @@ class MainScreen(QtWidgets.QWidget):
 #                   QTextEdit {background-color: #202020;color: white;}
 #                """)
 #        app.setStyleSheet("""""")
-        # Layout principal
+        # Layout principal con alineación siempre en la zona superior de la ventana
         self.CajaInicio = QtWidgets.QVBoxLayout()
         self.CajaInicio.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
 
-        # Título
+        # Texto del titulo junto con logo de la aplicación
         self.Titulo = QtWidgets.QLabel(
             "<html><img src='data/Logo.svg' width='30' height='30'></html> Buscador Metro CDMX"
         )
         self.Titulo.setFont(QtGui.QFont("Arial", 24, QtGui.QFont.Bold))
         self.CajaInicio.addWidget(self.Titulo)
 
-        # Mapa SVG (widget hijo)
+        # Mapa SVG (widget hijo), no se redimensiona
         self.mapa = QSvgWidget("data/Mexico_City_metro.svg")
         self.mapa.setFixedSize(530, 600)
         self.mapa.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
@@ -565,7 +590,7 @@ class MainScreen(QtWidgets.QWidget):
         # Cajas de texto (pasamos overlay porque es quien tiene add_ruta/limpiar_rutas)
         self.textos = CajasTexto(self.overlay)
 
-        # Layout horizontal: mapa + panel de textos
+        # Layout horizontal donde van el mapa y la zona de introducción de datos: mapa + panel de textos
         self.hbox = QtWidgets.QHBoxLayout()
         self.hbox.addWidget(self.mapa)
         self.hbox.addWidget(self.textos)
@@ -579,12 +604,22 @@ class MainScreen(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
+    #Inicializa el objeto principal para la interfaz
     app = QtWidgets.QApplication([])
+
+    #Define el nombre y el logo de la aplicación
     app.setApplicationDisplayName("Buscador Metro CDMX")
     app.setWindowIcon(QtGui.QIcon("data/logo.svg"))
+
+    #Inicializa la pantalla principal de la aplicación
     widget = MainScreen()
+
+    #Ajusta el tamaño y establece un parámetro para que la ventana de la
+    #aplicación no pueda cambiar de tamaño
     widget.resize(1024, 720)
     widget.setWindowFlag(QtCore.Qt.WindowType.MSWindowsFixedSizeDialogHint)
+
+    #Muestra la pantalla principal en la aplicación e inicia ejecución de la interfaz
     widget.show()
     sys.exit(app.exec())
 
